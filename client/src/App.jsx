@@ -24,51 +24,45 @@ const App = () => {
 
   const { user } = useUser();
   const { getToken } = useAuth();
+  const dispatch = useDispatch();
+  const {pathname} = useLocation();
+  const pathnameRef = useRef(pathname);
 
-  useEffect(() => {
-    if(user){
-      getToken().then((token) => console.log(token))
+  useEffect(()=>{
+    const fetchData = async () => {
+      if(user){
+        const token = await getToken();
+        dispatch(fetchUser(token));
+        dispatch(fetchConnections(token));
+      }
     }
-  }, [user])
-  // const dispatch = useDispatch();
-  // const {pathname} = useLocation();
-  // const pathnameRef = useRef(pathname);
+    fetchData();
+  },[user, getToken, dispatch]);
 
-  // useEffect(()=>{
-  //   const fetchData = async () => {
-  //     if(user){
-  //       const token = await getToken();
-  //       dispatch(fetchUser(token));
-  //       dispatch(fetchConnections(token));
-  //     }
-  //   }
-  //   fetchData();
-  // },[user, getToken, dispatch]);
+  useEffect(()=>{
+    pathnameRef.current = pathname;
+  },[pathname]);
 
-  // useEffect(()=>{
-  //   pathnameRef.current = pathname;
-  // },[pathname]);
+  useEffect(()=>{
+    if(user){
+      const eventSource = new EventSource(import.meta.env.VITE_BASE_URL + '/api/message/' + user.id);
 
-  // useEffect(()=>{
-  //   if(user){
-  //     const eventSource = new EventSource(import.meta.env.VITE_BASE_URL + '/api/message/' + user.id);
+      eventSource.onmessage = (event) => {
+        const message = JSON.parse(event.data);
 
-  //     eventSource.onmessage = (event) => {
-  //       const message = JSON.parse(event.data);
-
-  //       if(pathnameRef.current === ('/messages/' + message.from_user_id._id)){
-  //         dispatch(addMessage(message));
-  //       }else{
-  //         toast.custom((t)=>{
-  //           <Notification t={t} message={message}/>
-  //         }, {position: "bottom-right"})
-  //       }
-  //     }
-  //     return ()=>{
-  //       eventSource.close();
-  //     }
-  //   }
-  // },[user, dispatch])
+        if(pathnameRef.current === ('/messages/' + message.from_user_id._id)){
+          dispatch(addMessage(message));
+        }else{
+          toast.custom((t)=>{
+            <Notification t={t} message={message}/>
+          }, {position: "bottom-right"})
+        }
+      }
+      return ()=>{
+        eventSource.close();
+      }
+    }
+  },[user, dispatch])
 
   return (
     <>

@@ -10,8 +10,8 @@ import { dummyUserData } from './../assets/assets';
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
     const navigate = useNavigate();
-    const user = dummyUserData
-    //const user = useSelector((state) => state.user.value);
+    //const user = dummyUserData
+    const user = useSelector((state) => state.user.value);
     const { signOut } = useClerk();
 
   return (

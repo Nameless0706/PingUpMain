@@ -16,14 +16,14 @@ import { dummyConnectionsData, dummyFollowingData } from "../assets/assets.js";
 import { dummyPendingConnectionsData, dummyFollowersData } from './../assets/assets';
 
 const Connections = () => {
-  // const { connections, pendingConnections, followers, following } = useSelector(
-  //   (state) => state.connections
-  // );
+  const { connections, pendingConnections, followers, following } = useSelector(
+    (state) => state.connections
+  );
 
-  const connections = dummyConnectionsData
-  const pendingConnections = dummyPendingConnectionsData
-  const followers = dummyFollowersData
-  const following = dummyFollowingData
+  // const connections = dummyConnectionsData
+  // const pendingConnections = dummyPendingConnectionsData
+  // const followers = dummyFollowersData
+  // const following = dummyFollowingData
   const { getToken } = useAuth();
   const dispatch = useDispatch();
 

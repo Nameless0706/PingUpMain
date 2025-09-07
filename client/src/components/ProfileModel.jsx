@@ -10,8 +10,8 @@ const ProfileModel = ({ setShowEdit }) => {
 
     const dispatch = useDispatch();
     const { getToken } = useAuth();
-    //const user = useSelector((state) => state.user.value);
-    const user = dummyUserData
+    const user = useSelector((state) => state.user.value);
+    //const user = dummyUserData
 
     const [editForm, setEditForm] = useState({
         username: user.username,

@@ -11,8 +11,8 @@ import { dummyMessagesData } from './../assets/assets';
 const ChatBox = () => {
 
 
-   const messages = dummyMessagesData
-  //const {messages} = useSelector(state => state.messages);
+  //const messages = dummyMessagesData
+  const {messages} = useSelector(state => state.messages);
   const { userId } = useParams();
   const { getToken } = useAuth();
   const dispatch = useDispatch();

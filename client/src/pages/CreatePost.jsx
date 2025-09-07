@@ -12,8 +12,8 @@ const CreatePost = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // const user = useSelector((state) => state.user.value);
-  const user = dummyUserData
+  const user = useSelector((state) => state.user.value);
+  //const user = dummyUserData
   const navigate = useNavigate();
   const { getToken } = useAuth();
 

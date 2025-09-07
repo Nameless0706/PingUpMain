@@ -10,8 +10,8 @@ import { dummyUserData } from './../assets/assets';
 
 const UserCard = ({ user }) => {
 
-    //const currentUser = useSelector((state) => state.user.value);
-    const currentUser = dummyUserData
+    const currentUser = useSelector((state) => state.user.value);
+    //const currentUser = dummyUserData
     const { getToken } = useAuth();
     const dispatch =  useDispatch();
     const navigate = useNavigate();

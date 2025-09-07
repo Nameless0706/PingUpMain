@@ -9,8 +9,8 @@ import api from "../api/axios.js";
 import toast from "react-hot-toast";
 
 const Feed = () => {
-  const feeds = dummyPostsData;
-  //const [feeds, setFeeds] = useState([]);
+  //const feeds = dummyPostsData;
+  const [feeds, setFeeds] = useState([]);
   const [loading, setLoading] = useState(true);
   const { getToken } = useAuth();
 

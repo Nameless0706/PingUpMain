@@ -8,8 +8,8 @@ import { dummyUserData } from './../assets/assets';
 
 const Layout = () => {
 
-  const user = dummyUserData
-  //const user = useSelector((state) => state.user.value);
+  //const user = dummyUserData
+  const user = useSelector((state) => state.user.value);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return user ? (
